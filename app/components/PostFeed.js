@@ -1,5 +1,7 @@
-import React, { PropTypes } from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import Post from 'components/Post'
+import * as actions from 'actions/creator-post-feed';
 
 
 /* crappy styles */
@@ -15,15 +17,11 @@ const postSpacerStyle = {
 }
 
 /* component */
-export default React.createClass({
-    propTypes: {
-        posts: PropTypes.array,
-        onMount: PropTypes.func
-    },
-
+class PostFeed extends Component {
     componentDidMount() {
-        // ??? fix me
-    },
+      console.log(this.props);
+      //this.props.fetchPosts();
+    }
 
     renderPost(post) {
         return (
@@ -32,15 +30,24 @@ export default React.createClass({
                 <Post post={post} />
             </div>
         )
-    },
+    }
 
     render() {
-        const { posts, isLoading } = this.props
-
-        return isLoading ?
-            'Loading!' :
-            (<div style={postFeedStyle}>
-                { posts && posts.map(this.renderPost) }
+      return (<div style={postFeedStyle}>
+                { this.props.posts && this.props.posts.map(this.renderPost) }
             </div>)
+
+        // return isLoading ?
+        //     'Loading!' :
+        //     (<div style={postFeedStyle}>
+        //         { posts && posts.map(this.renderPost) }
+        //     </div>)
     }
-})
+};
+
+function mapStateToProps(state){
+  return {
+    posts: state.postFeed
+  }
+}
+export default connect(mapStateToProps, actions)(PostFeed);
