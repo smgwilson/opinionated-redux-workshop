@@ -1,12 +1,12 @@
 {
-  "name": "",
+  "name": "opinionated-redux",
   "babel": {
     "presets": [
       "stage-2"
     ]
   },
   "version": "0.2.0",
-  "description": "",
+  "description": "Opinionated Redux Workshop @ Forward JS 2016",
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
